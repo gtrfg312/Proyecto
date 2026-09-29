@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prototipo de Asistencias e Inasistencias</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <section id="login" class="login-screen">
+    <form id="login-form" class="login-card">
+      <div class="logo-placeholder" aria-hidden="true"><span>×</span></div>
+      <h1>Sistema de Gestión de<br>Asistencias e Inasistencias</h1>
+      <p>Acceso del personal escolar</p>
+      <label>Usuario o correo electrónico<input id="username" required autocomplete="username" placeholder="Escribe tu usuario"></label>
+      <label>Contraseña<input id="password" type="password" required autocomplete="current-password" placeholder="Escribe tu contraseña"></label>
+      <button class="primary full" type="submit">INICIAR SESIÓN</button>
+      <small>Prototipo visual: escribe cualquier usuario y contraseña para entrar. Los cambios se borran al recargar.</small>
+    </form>
+  </section>
+
+  <div id="app" class="app hidden">
+    <header class="topbar"><div class="brand"><div class="brand-mark">×</div><strong>GESTIÓN DE ASISTENCIAS E INASISTENCIAS</strong></div><span id="signed-user">Administrador</span></header>
+    <aside class="sidebar"><nav aria-label="Menú principal">
+      <button data-page="dashboard" class="nav active">Panel principal</button>
+      <button data-page="students" class="nav">Estudiantes</button>
+      <button data-page="attendance" class="nav">Asistencias</button>
+      <button data-page="reports" class="nav">Reportes</button>
+    </nav><button id="logout" class="logout">Cerrar sesión</button></aside>
+    <main class="main">
+      <section id="dashboard" class="page">
+        <h1>Panel principal</h1><p class="subheading" id="today-heading"></p>
+        <div class="stats">
+          <article class="stat"><strong id="stat-students">0</strong><span>Estudiantes</span></article>
+          <article class="stat"><strong id="stat-present">0</strong><span>Asistencias</span></article>
+          <article class="stat"><strong id="stat-absent">0</strong><span>Inasistencias</span></article>
+          <article class="stat"><strong id="stat-percent">0 %</strong><span>Asistencia</span></article>
+        </div>
+        <h2>Acciones rápidas</h2><div class="actions"><button class="primary" data-go="students" data-add="true">+ Agregar estudiante</button><button class="primary" data-go="attendance">Registrar asistencia</button><button class="primary" data-go="reports">Ver reportes</button></div>
+        <h2>Asistencia reciente</h2><div class="table-wrap"><table><thead><tr><th>Matrícula</th><th>Nombre</th><th>Grupo</th><th>Estado</th><th>Fecha</th></tr></thead><tbody id="recent-body"></tbody></table></div>
+      </section>
+
+      <section id="students" class="page hidden">
+        <h1>Gestión de estudiantes</h1><p class="subheading">Consulta y administra los registros escolares</p>
+        <div class="toolbar"><input id="student-search" type="search" placeholder="Buscar por nombre o matrícula..." aria-label="Buscar estudiantes"><button id="add-student" class="primary">+ NUEVO ESTUDIANTE</button></div>
+        <div class="table-wrap"><table><thead><tr><th>Matrícula</th><th>Nombre</th><th>Grupo</th><th>Estado</th><th>Acción</th></tr></thead><tbody id="students-body"></tbody></table></div>
+        <p class="muted" id="students-count"></p>
+      </section>
+
+      <section id="attendance" class="page hidden">
+        <h1>Registro de asistencia</h1><p class="subheading">Marca la asistencia por grupo y fecha</p>
+        <div class="toolbar attendance-toolbar"><label>Fecha<input id="attendance-date" type="date"></label><label>Grupo<select id="attendance-group"></select></label><button id="save-attendance" class="primary">APLICAR ASISTENCIA</button></div>
+        <div class="table-wrap"><table><thead><tr><th>Matrícula</th><th>Estudiante</th><th>Presente</th><th>Ausente</th></tr></thead><tbody id="attendance-body"></tbody></table></div>
+        <p id="attendance-summary" class="summary"></p><p id="save-status" role="status"></p>
+      </section>
+
+      <section id="reports" class="page hidden">
+        <h1>Reportes e historial</h1><p class="subheading">Consulta inasistencias y seguimiento por fecha o grupo</p>
+        <div class="toolbar"><label>Grupo<select id="report-group"></select></label><label>Desde<input type="date" id="report-start"></label><label>Hasta<input type="date" id="report-end"></label><button id="export-csv" class="primary">EXPORTAR CSV</button></div>
+        <div class="report-cards"><article class="stat"><span>Asistencia del periodo</span><strong id="report-percent">0 %</strong></article><article class="stat"><span>Resumen</span><p id="report-summary">Sin registros</p></article></div>
+        <h2>Historial de registros</h2><div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Estudiante</th><th>Grupo</th><th>Estado</th></tr></thead><tbody id="report-body"></tbody></table></div>
+      </section>
+    </main>
+    <footer>Prototipo visual · Sistema de Gestión de Asistencias e Inasistencias Escolares</footer>
+  </div>
+
+  <dialog id="student-dialog"><form id="student-form"><h2 id="dialog-title">Nuevo estudiante</h2><input type="hidden" id="original-id"><label>Matrícula<input id="student-id" required maxlength="20"></label><label>Nombre completo<input id="student-name" required maxlength="100"></label><label>Grupo<input id="student-group" required maxlength="30" placeholder="Ej. 4° A"></label><div class="dialog-actions"><button type="button" id="cancel-dialog">Cancelar</button><button class="primary" type="submit">Guardar estudiante</button></div><p id="student-error" role="alert"></p></form></dialog>
+  <script src="app.js" defer></script>
+</body>
+</html>

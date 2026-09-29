@@ -1,0 +1,11 @@
+PROTOTIPO VISUAL: SISTEMA DE ASISTENCIAS E INASISTENCIAS
+
+1. Descomprime el ZIP.
+2. En Visual Studio Code selecciona Archivo > Abrir carpeta y elige Sistema_Asistencias_Prototipo.
+3. Abre index.html con Live Server (o haz doble clic en index.html).
+4. Escribe cualquier usuario y contraseña para entrar.
+5. Prueba los botones de navegación, agrega o edita estudiantes de ejemplo, marca asistencias y consulta reportes.
+
+Es un prototipo interactivo del wireframe blanco y negro. No tiene base de datos, servidor ni almacenamiento en el navegador. Los cambios solo existen mientras la pestaña está abierta: al recargar se restablecen los cinco estudiantes de ejemplo y las asistencias se vacían.
+
+Archivos: index.html (pantallas), styles.css (diseño), app.js (interacciones).
